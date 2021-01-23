@@ -17,7 +17,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """"""
+    """Pagina para loguear al usuario con sus credenciales"""
     username = session.get('username')
     login_form = LoginForm()
     context = {
