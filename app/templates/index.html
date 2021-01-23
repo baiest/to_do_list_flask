@@ -1,0 +1,17 @@
+{% extends 'bootstrap/base.html'%}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <title>{% block title %}TODO LIST | {% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        {% if username%}
+            Bienvenido {{username}}
+        {% endblock %}
+    {% endblock %}
+    {% block scripts %}
+        {{super()}}
+    {% endblock %}
+{% endblock%}
