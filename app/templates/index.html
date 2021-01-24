@@ -7,9 +7,9 @@
 
 {% block body %}
     {% block content %}
-        {% if username%}
-            Bienvenido {{username}}
-        {% endblock %}
+        {% if username %}
+            <h1>Bienvenido {{username}}</h1>
+        {% endif %}
     {% endblock %}
     {% block scripts %}
         {{super()}}

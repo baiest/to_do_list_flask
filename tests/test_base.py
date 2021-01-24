@@ -12,12 +12,23 @@ class MainTest(TestCase):
     def test_app_exists(self):
         self.assertIsNotNone(current_app)
 
+    def test_index_redirects(self):
+        response = self.client.get(url_for('index'))
+        self.assertRedirects(response, url_for('login'))
+
     def test_login_user(self):
         user_fake = {
             'username': 'fake',
             'password': 'pass-fake'
         }
 
-        response = self.client.post(url_for('login', data=fake_user))
-
+        response = self.client.post(url_for('login'), data=user_fake)
         self.assertRedirects(response, url_for('index'))
+    
+    def test_auth_blueprint_exists(self):
+        self.assertIn('auth', self.app.blueprints)
+    
+    def test_auth_login_get(self):
+        response = self.client.get(url_for('auth.login'))
+
+        self.assertTemplateUsed('login.html')
