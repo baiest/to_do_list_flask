@@ -1,6 +1,7 @@
 from flask_testing import TestCase
 from flask import current_app, url_for
 from main import app
+from app import login_manager
 
 class MainTest(TestCase):
     def create_app(self):
@@ -14,7 +15,7 @@ class MainTest(TestCase):
 
     def test_index_redirects(self):
         response = self.client.get(url_for('index'))
-        self.assertRedirects(response, url_for('auth.login'))
+        self.assertRedirects(response, url_for(login_manager.login_view) + '?next=%2F')
 
     def test_auth_blueprint_exists(self):
         self.assertIn('auth', self.app.blueprints)
@@ -25,8 +26,8 @@ class MainTest(TestCase):
 
     def test_login_user(self):
         user_fake = {
-            'username': 'fake',
-            'password': 'pass-fake'
+            'username': 'bernardo',
+            'password': 'password'
         }
 
         response = self.client.post(url_for('auth.login'), data=user_fake)

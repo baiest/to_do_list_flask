@@ -14,6 +14,9 @@ def get_users():
     users = db.collection('users').get()
     return users
 
+def get_user(user_id):
+    return db.collection('users').document(user_id).get()
+
 def get_todos(user_id):
     todos = db.collection('users')\
         .document(user_id)\

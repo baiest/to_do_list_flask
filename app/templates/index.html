@@ -7,6 +7,15 @@
 {% endblock %}
 
 {% block body %}
+    {% block navbar %}
+        {% include 'navbar.html'%}
+    {% endblock %}
+    {% for message in get_flashed_messages() %}
+        <div class = 'alert alert-success alert-dismissible'>
+            <button type="button" data-dismiss='alert' class='close'>&times;</button>
+            {{message}}
+        </div>
+    {% endfor %}
     {% block content %}
         {% if username %}
             <h1>Bienvenido {{username}}</h1>

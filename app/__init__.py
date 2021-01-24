@@ -4,18 +4,22 @@ from flask_login import LoginManager
 
 from .config import Config
 from .auth import auth
+from .models import UserModel
 
-login = LoginManager()
-login.login_view = 'auth.login'
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
 
-@login.user_loader
+@login_manager.user_loader
+def load_user(username):
+    return UserModel.query(username)
+
 def create_app():
     app = Flask(__name__)
     bootstrap = Bootstrap(app)
 
     app.config.from_object(Config)
 
-    login.init_app(app)
+    login_manager.init_app(app)
 
     app.register_blueprint(auth)
 
