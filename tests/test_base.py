@@ -14,7 +14,14 @@ class MainTest(TestCase):
 
     def test_index_redirects(self):
         response = self.client.get(url_for('index'))
-        self.assertRedirects(response, url_for('login'))
+        self.assertRedirects(response, url_for('auth.login'))
+
+    def test_auth_blueprint_exists(self):
+        self.assertIn('auth', self.app.blueprints)
+    
+    def test_auth_login_get(self):
+        response = self.client.get(url_for('auth.login'))
+        self.assertTrue(response.status_code, 405)
 
     def test_login_user(self):
         user_fake = {
@@ -22,13 +29,5 @@ class MainTest(TestCase):
             'password': 'pass-fake'
         }
 
-        response = self.client.post(url_for('login'), data=user_fake)
+        response = self.client.post(url_for('auth.login'), data=user_fake)
         self.assertRedirects(response, url_for('index'))
-    
-    def test_auth_blueprint_exists(self):
-        self.assertIn('auth', self.app.blueprints)
-    
-    def test_auth_login_get(self):
-        response = self.client.get(url_for('auth.login'))
-
-        self.assertTemplateUsed('login.html')

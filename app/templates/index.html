@@ -1,8 +1,9 @@
 {% extends 'bootstrap/base.html'%}
+{% import 'macro.html' as macros %}
 {% block head %}
     {{super()}}
     <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
-    <title>{% block title %}TODO LIST | {% endblock %}</title>
+    <title>{% block title %}TODO LIST |{% endblock %}</title>
 {% endblock %}
 
 {% block body %}
@@ -11,6 +12,11 @@
             <h1>Bienvenido {{username}}</h1>
         {% endif %}
     {% endblock %}
+    <ul>
+        {% for todo in todos %}
+            {{ macros.render_todo(todo) }}
+        {% endfor %}
+    </ul>
     {% block scripts %}
         {{super()}}
     {% endblock %}
