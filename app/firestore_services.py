@@ -17,6 +17,10 @@ def get_users():
 def get_user(user_id):
     return db.collection('users').document(user_id).get()
 
+def user_put(user_data):
+    user_ref = db.collection('users').document(user_data.username)
+    user_ref.set({'password': user_data.password})
+
 def get_todos(user_id):
     todos = db.collection('users')\
         .document(user_id)\
@@ -24,6 +28,11 @@ def get_todos(user_id):
     
     return todos
 
-def user_put(user_data):
-    user_ref = db.collection('users').document(user_data.username)
-    user_ref.set({'password': user_data.password})
+def put_todo(user_id, description):
+    to_do_collection_ref = db.collection('users').document(user_id).collection('todos')
+    to_do_collection_ref.add({'description': description, 'done': False})
+
+def delete_todo(user_id, todo_id):
+    #todo_ref = deb.collection('users').document(user_id).collection('todos').document(todo_id)
+    todo_ref = db.document(f'users/{user_id}/todos/{todo_id}')
+    todo_ref.delete()
