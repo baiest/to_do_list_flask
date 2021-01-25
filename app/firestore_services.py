@@ -34,5 +34,13 @@ def put_todo(user_id, description):
 
 def delete_todo(user_id, todo_id):
     #todo_ref = deb.collection('users').document(user_id).collection('todos').document(todo_id)
-    todo_ref = db.document(f'users/{user_id}/todos/{todo_id}')
+    todo_ref = _get_todo(user_id, todo_id)
     todo_ref.delete()
+
+def update_todo(user_id, todo_id, done):
+    todo_ref = _get_todo(user_id, todo_id)
+    todo_ref.update({'done': not done})
+
+def _get_todo(user_id, todo_id):
+    todo_ref = db.document(f'users/{user_id}/todos/{todo_id}')
+    return todo_ref

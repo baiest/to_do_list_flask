@@ -27,7 +27,7 @@ class MainTest(TestCase):
   
     def test_login_and_logout_user(self):
         user_fake = {
-            'username': 'Juan',
+            'username': 'juan',
             'password': 'pass'
         }
 
@@ -45,3 +45,4 @@ class MainTest(TestCase):
 
         response = self.client.post(url_for('auth.signup', data=new_user))
         self.assert200(response)
+
