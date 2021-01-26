@@ -23,15 +23,17 @@
                 <h1>Bienvenido {{username | capitalize}}</h1>
             {% endif %}
         {% endblock %}
-
-        <section class="form">
-            {{ wtf.quick_form(todo_form) }}
-        </section>
-
+        {% if todo_form%}
+            <section class="form">
+                {{ wtf.quick_form(todo_form) }}
+            </section>
+        {% endif %}
         <ul class="list-group">
-            {% for todo in todos %}
-                {{ macros.render_todo(todo, delete_form, update_form) }}
-            {% endfor %}
+            <section class='row'>
+                {% for todo in todos %}
+                    {{ macros.render_todo(todo, delete_form, update_form) }}
+                {% endfor %}
+            </section>
         </ul>
     </div>
     {% block scripts %}

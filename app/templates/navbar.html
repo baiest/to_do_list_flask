@@ -1,25 +1,21 @@
-<div class='navbar navbar-inverse' role='navigation'>
-    <div class='container'>
-        <div class='navbar-header'>
-            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-                <span class='sr-only'>Toggle navigation</span>
-                <span class='icon-bar'></span>
-                <span class='icon-bar'></span>
-                <span class='icon-bar'></span>
-            </button>
-        </div>
+<nav class='navbar navbar-expand-lg navbar-light bg-light' role='navigation'>
+    <a class="navbar-brand" href="{{url_for('index')}}">Tareas Flask</a>
+    <button class='navbar-toggler btn-sm' type='button' data-toggle='collapse' 
+    data-target="#menu" aria-controls="menu" 
+    aria-expanded="false" aria-label="Toggle navigation">
+        <span class='navbar-toggler-icon'></span>
+    </button> 
 
-        <div class='navbar-collapse collapse'>
-            <ul class='nav navbar-nav'>
-                <li><a href="{{url_for('index')}}">Inicio</a></li>
-                <li><a href='https://platzi.com'>Platzi</a></li>
-                <li><a href='https://baiest.github.io'>Baiest</a></li>
-                {% if current_user.is_authenticated %}
-                    <li><a href="{{url_for('auth.logout')}}">Log out</a></li>
-                {% else %}
-                    <li><a href="{{url_for('auth.signup')}}">Registrate</a></li>
-                {% endif %}
-            </ul>
-        </div>
+    <div class='navbar-collapse collapse' id='menu'>
+        <ul class='navbar-nav'>
+            <li><a class='nav-item nav-link active' href="{{url_for('index')}}">Inicio</a></li>
+            <li><a class='nav-item nav-link active' href='https://platzi.com'>Platzi</a></li>
+            <li><a class='nav-item nav-link active' href='https://baiest.github.io'>Baiest</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a class='nav-item nav-link active' href="{{url_for('auth.logout')}}">Log out</a></li>
+            {% else %}
+                <li><a class='nav-item nav-link active' href="{{url_for('auth.signup')}}">Registrate</a></li>
+            {% endif %}
+        </ul>
     </div>
-</div>
+</nav>
